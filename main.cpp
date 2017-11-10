@@ -1,7 +1,12 @@
-#include <iostream>
+#include "utils/Game.h"
+#include "game/scenes/Tutorial.h"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::cout << "Hello, World!" << std::endl;
-    return 0;
+    Game game(argc, argv);
+    game.setScene(new Tutorial());
+    game.setFixedSize(500, 500);
+    game.show();
+
+    return game.exec(); // TODO: CLion: This is no error, need to check this.
 }
