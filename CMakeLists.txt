@@ -8,6 +8,6 @@ find_package(Qt5Widgets REQUIRED)
 find_package(Qt5Core REQUIRED)
 find_package(Qt5Gui REQUIRED)
 
-set(SOURCE_FILES main.cpp game/scenes/Tutorial.cpp game/scenes/Tutorial.h utils/base/Scene.cpp utils/base/Scene.h utils/Game.cpp utils/Game.h utils/objects/Player.cpp utils/objects/Player.h)
+set(SOURCE_FILES main.cpp game/scenes/Tutorial.cpp game/scenes/Tutorial.h utils/base/Scene.cpp utils/base/Scene.h utils/Game.cpp utils/Game.h utils/objects/Player.cpp utils/objects/Player.h utils/base/XMLParser.cpp utils/base/XMLParser.h)
 add_executable(Bitwolf_Engine ${SOURCE_FILES})
 target_link_libraries(Bitwolf_Engine Qt5::Widgets)
