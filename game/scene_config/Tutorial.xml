@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<game>
-    <player x="100" y="200">
-
-    </player>
-</game>
+<map width="500" height="500"> <!-- Grösse der Map -->
+    <player x="100" y="100"></player> <!--Startpunkt des Spielers -->
+</map>
