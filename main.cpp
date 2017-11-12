@@ -1,10 +1,12 @@
 #include "utils/Game.h"
-#include "game/scenes/Tutorial.h"
+#include "utils/base/XMLParser.h"
 
 int main(int argc, char *argv[])
 {
     Game game(argc, argv);
-    game.setScene(new Tutorial());
+    XMLParser parser;
+    parser.loadXml(QString("Tutorial"));
+    game.setScene(parser.setScene());
     game.setFixedSize(500, 500);
     game.show();
 
