@@ -1,5 +1,4 @@
 #include "utils/Game.h"
-#include "utils/base/XMLParser.h"
 
 int main(int argc, char *argv[])
 {

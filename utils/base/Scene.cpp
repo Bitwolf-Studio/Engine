@@ -1,5 +1,4 @@
 #include "Scene.h"
-#include <QDebug>
 
 Scene::Scene()
 {
