@@ -6,9 +6,10 @@
 
 class Player : public QGraphicsRectItem {
 public:
-    void keyPressEvent(QKeyEvent *event) override;
-
     Player();
+    void setX(int x);
+    void setY(int y);
+    void keyPressEvent(QKeyEvent *event) override;
 };
 
 

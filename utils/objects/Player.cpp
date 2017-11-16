@@ -2,6 +2,21 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
 
+Player::Player()
+{
+    this->setRect(0, 0, 100, 100);
+    this->setFlag(QGraphicsItem::ItemIsFocusable);
+    this->setFocus();
+}
+
+void Player::setX(int x) {
+    this->setPos(x, this->y());
+}
+
+void Player::setY(int y) {
+    this->setPos(this->x(), y);
+}
+
 void Player::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Left) {
@@ -15,11 +30,4 @@ void Player::keyPressEvent(QKeyEvent *event)
     } else if (event->key() == Qt::Key_Down) {
         setPos(x(), y() + 10);
     }
-}
-
-Player::Player()
-{
-    this->setRect(0, 0, 100, 100);
-    this->setFlag(QGraphicsItem::ItemIsFocusable);
-    this->setFocus();
 }

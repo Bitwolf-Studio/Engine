@@ -8,6 +8,7 @@
 class Game final : public QApplication, public QGraphicsView {
 public:
     Game(int &argc, char **argv) : QApplication(argc, argv) {};
+    int start();
 };
 
 
