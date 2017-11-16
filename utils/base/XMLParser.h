@@ -1,22 +1,19 @@
-//
-// Created by Nicolas on 12.11.17.
-//
-
 #ifndef BITWOLF_ENGINE_XMLPARSER_H
 #define BITWOLF_ENGINE_XMLPARSER_H
 
 
 #include <QString>
 #include <QFile>
+#include "Scene.h"
 
 class XMLParser {
 private:
-    QFile * currentFile;
+    QFile *currentFile;
 
 public:
     XMLParser();
-    void loadXml(QString);
-    QGraphicsScene* setScene();
+    bool isValid(QFile * file);
+    void loadXml(QString file, Scene * scene);
 };
 
 

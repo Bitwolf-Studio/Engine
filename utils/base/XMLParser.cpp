@@ -1,60 +1,64 @@
-//
-// Created by Nicolas on 12.11.17.
-//
-
 #include <QDir>
 #include <QDebug>
 #include <QXmlStreamReader>
 #include <QGraphicsScene>
 #include "XMLParser.h"
-#include "../objects/Player.h"
 
 XMLParser::XMLParser() = default;
 
 /**
- * This function loads an XML file and stores it in the local variable currentFile.
- * @param xmlFile
+ * This function reads and parses an XML file and stores the data in the injected scene object.
+ * @param xmlFile: Name of the Xml file located in game/scene_config, without the .xml extension.
+ * @param * scene: A pointer to the scene object the data should be stored in.
  */
-void XMLParser::loadXml(QString xmlFile) {
-    qDebug() << QString(QDir::currentPath() + "/../game/scene_config/" + xmlFile + ".xml");
+void XMLParser::loadXml(QString xmlFile, Scene * scene) {
     auto *file = new QFile(QString(QDir::currentPath() + "/../game/scene_config/" + xmlFile + ".xml"));
     if (!file->open(QFile::ReadOnly | QFile::Text)) {
         // Error:
+        qDebug() << "Error opening file";
     }
-    currentFile = file;
-};
 
-/**
- * This function reads the XML file stored in private variable currentFile
- * and sets the scene.
- */
-QGraphicsScene* XMLParser::setScene() {
-    auto * scene = new QGraphicsScene;
-    auto * player = new Player;
+    this->isValid(file);
 
     QXmlStreamReader reader;
-    reader.setDevice(currentFile);
+    reader.setDevice(file);
     reader.readNext();
 
-    while (!reader.atEnd() && !reader.hasError()) {
+    while(!reader.atEnd() && !reader.hasError()) {
         reader.readNext();
         if (reader.isStartElement()) {
             if (reader.name().toString() == "map") {
-                int width = reader.attributes().value(QString("width")).toInt();
-                int height = reader.attributes().value(QString("height")).toInt();
-                scene->setSceneRect(0, 0, width, height);
+                scene->setWidth(reader.attributes().value(QString("width")).toInt());
+                scene->setHeight(reader.attributes().value(QString("height")).toInt());
                 reader.readNext();
             }
             else if (reader.name().toString() == "player") {
-                scene->addItem(player);
-                int x = reader.attributes().value(QString("x")).toInt();
-                int y = reader.attributes().value(QString("y")).toInt();
-                player->setPos(x, player->y());
-                player->setPos(player->x(), y);
+                scene->getPlayer()->setX(reader.attributes().value(QString("x")).toInt());
+                scene->getPlayer()->setY(reader.attributes().value(QString("y")).toInt());
+                reader.readNext();
             }
         }
     }
-    currentFile->close();
-    return scene;
+    if (reader.hasError()) {
+        qDebug() << reader.errorString();
+    }
+
+    file->close();
 };
 
+/**
+ * This function checks if the currentFile is XML.
+ * @return Returns true if the XML file is valid.
+ */
+bool XMLParser::isValid(QFile * file) {
+    if (file == nullptr) {
+        return false;
+    }
+    else if (true) {
+        // TODO: Check if valid XML
+        return true;
+    }
+    else {
+        return false;
+    }
+};
