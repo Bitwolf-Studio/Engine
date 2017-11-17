@@ -16,6 +16,7 @@ before_install:
 
 install:
   - sudo apt-get -y install qt55base
+  - dpkg -L qt55base
   - export CXX="g++-4.8"
   - export CC="gcc-4.8"
   - cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" --target Bitwolf_Engine .
