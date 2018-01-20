@@ -101,10 +101,22 @@ void XMLParser::readPlayerAttributes(QXmlStreamReader *reader, Scene *scene) {
     scene->getPlayer()->setY(reader->attributes().value(QString("y")).toInt());
 }
 
+/**
+ * This reads an attribute of the current XML-Token (Element).
+ * @param reader Pointer to QXmlStringReader object
+ * @param attribute QString or String of the name of the attribute
+ * @return The attribute converted to a string
+ */
 QString XMLParser::readStrAttr(QXmlStreamReader * reader, QString attribute) {
     return reader->attributes().value(attribute).toString();
 }
 
-int XMLParser::readIntAttr(QXmlStreamReader *reader, QString num) {
-    return reader->attributes().value(num).toInt();
+/**
+ * This reads an attribute of the current XML-Token (Element)
+ * @param reader Pointer to QXmlStreamReader object
+ * @param attribute QString or String of the name of the attribute
+ * @return The attribute converted to an integer
+ */
+int XMLParser::readIntAttr(QXmlStreamReader *reader, QString attribute) {
+    return reader->attributes().value(attribute).toInt();
 };

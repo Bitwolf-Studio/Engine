@@ -18,7 +18,7 @@ public:
     void readMapAttributes(QXmlStreamReader * reader, Scene * scene);
     void readPlayerAttributes(QXmlStreamReader * reader, Scene *scene);
     QString readStrAttr(QXmlStreamReader * reader, QString attribute);
-    int readIntAttr(QXmlStreamReader *reader, QString num);
+    int readIntAttr(QXmlStreamReader *reader, QString attribute);
 };
 
 
