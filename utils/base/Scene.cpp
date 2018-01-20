@@ -29,3 +29,15 @@ void Scene::prepareScene() {
     this->addItem(this->player);
     this->setSceneRect(0, 0, this->width, this->height);
 }
+
+void Scene::setTime(int time) {
+    this->time = time;
+}
+
+void Scene::setTarget(QString target) {
+    this->target = target;
+}
+
+void Scene::setBgColor(QColor color) {
+    this->bgcolor = color;
+}

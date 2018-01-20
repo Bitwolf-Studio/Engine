@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<map width="1280"
+     height="720"
+     time="5000"
+     target="Tutorial"
+     bgcolor="50,50,50,255">
+    <objects>
+        <sprite desc="logo"
+                url="logo_v1.png"
+                width="320"
+                height="320"
+                x="480"
+                y="480" />
+        <sprite desc="test" />
+    </objects>
+</map>
+
+
