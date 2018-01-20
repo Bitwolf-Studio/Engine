@@ -4,7 +4,7 @@
 int Game::start() {
     auto * scene = new Scene();
     XMLParser parser;
-    parser.loadXml(QString("Tutorial"), scene);
+    parser.loadXml(QString("Splashscreen"), scene);
     scene->prepareScene();
     this->setScene(scene);
     this->setFixedSize(1280, 720);
