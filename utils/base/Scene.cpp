@@ -28,6 +28,7 @@ Player * Scene::getPlayer() {
 void Scene::prepareScene() {
     this->addItem(this->player);
     this->setSceneRect(0, 0, this->width, this->height);
+    this->setBackgroundBrush(QBrush(this->bgcolor));
 }
 
 void Scene::setTime(int time) {
