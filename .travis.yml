@@ -1,7 +1,7 @@
 language: c++
 compiler: gcc
 sudo: require
-dist: xenial
+dist: trusty
 
 addons:
   apt:
@@ -11,15 +11,16 @@ addons:
       - g++-4.8
 
 before_install:
-  - sudo apt-add-repository --yes ppa:beineri/opt-qt-5.10.0-xenial
+  - sudo apt-add-repository --yes ppa:beineri/opt-qt594-trusty
   - sudo apt-get -qq update
 
 install:
+  - source /opt/qt59/bin/qt59-env.sh
   - sudo apt-get -y install qt510base
   - ls -al /opt/
-  - ls -al /opt/qt510
-  - ls -al /opt/qt510/lib
-  - export CMAKE_PREFIX_PATH="/opt/qt510/lib/cmake/"
+  - ls -al /opt/qt59
+  - ls -al /opt/qt59/lib
+  - export CMAKE_PREFIX_PATH="/opt/qt59/lib/cmake/"
   - env
   - export CXX="g++-4.8"
   - export CC="gcc-4.8"
