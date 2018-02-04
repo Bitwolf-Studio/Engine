@@ -17,5 +17,6 @@ before_install:
 install:
   - sudo apt-get -y install qt59base
   - /opt/qt59/bin/qt59-env.sh
+  - export CMAKE_PREFIX_PATH="/opt/qt59/lib/cmake/"
 
 script: cmake -DCMAKE_BUILD_TYPE= -G "CodeBlocks - Unix Makefiles" --target Bitwolf_Engine .
