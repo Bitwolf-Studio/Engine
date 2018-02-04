@@ -15,12 +15,12 @@ before_install:
   - sudo apt-get -qq update
 
 install:
-  - cat /opt/qt59/bin/qt59-env.sh
-  - /opt/qt59/bin/qt59-env.sh
-  - sudo apt-get -y install qt510base
+  - sudo apt-get -y install qt59base
   - ls -al /opt/
   - ls -al /opt/qt59
   - ls -al /opt/qt59/lib
+  - cat /opt/qt59/bin/qt59-env.sh
+  - /opt/qt59/bin/qt59-env.sh
   - export CMAKE_PREFIX_PATH="/opt/qt59/lib/cmake/"
   - env
   - export CXX="g++-4.8"
