@@ -1,8 +1,7 @@
 #include "Scene.h"
 
-Scene::Scene()
-{
-    this->player = new Player();
+Scene::Scene() {
+
 }
 
 int Scene::getWidth() {
@@ -21,12 +20,11 @@ void Scene::setHeight(int y) {
     this->height = y;
 }
 
-Player * Scene::getPlayer() {
+Player *Scene::getPlayer() {
     return this->player;
 }
 
 void Scene::prepareScene() {
-    this->addItem(this->player);
     this->setSceneRect(0, 0, this->width, this->height);
     this->setBackgroundBrush(QBrush(this->bgcolor));
 }
@@ -41,4 +39,9 @@ void Scene::setTarget(QString target) {
 
 void Scene::setBgColor(QColor color) {
     this->bgcolor = color;
+}
+
+void Scene::createPlayer() {
+    this->player = new Player();
+    this->addItem(this->player);
 }

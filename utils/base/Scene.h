@@ -33,6 +33,8 @@ public:
     void prepareScene();
 
     Player *getPlayer();
+
+    void createPlayer();
 };
 
 

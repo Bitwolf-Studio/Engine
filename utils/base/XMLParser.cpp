@@ -97,6 +97,7 @@ void XMLParser::readMapAttributes(QXmlStreamReader * reader, Scene * scene) {
  * @param scene The current Scene object
  */
 void XMLParser::readPlayerAttributes(QXmlStreamReader *reader, Scene *scene) {
+    scene->createPlayer();
     scene->getPlayer()->setX(reader->attributes().value(QString("x")).toInt());
     scene->getPlayer()->setY(reader->attributes().value(QString("y")).toInt());
 }
