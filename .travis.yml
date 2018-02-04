@@ -6,7 +6,7 @@ dist: trusty
 addons:
   apt:
     packages:
-      - clang-3.8
+      - clang-5
       - cmake
       - g++-4.8
 
