@@ -6,7 +6,7 @@ dist: trusty
 addons:
   apt:
     packages:
-      - clang-5
+      - clang
       - cmake
       - g++-4.8
 
@@ -15,6 +15,7 @@ before_install:
   - sudo apt-get -qq update
 
 install:
+  - clang --verison
   - sudo apt-get -y install qt59base
   - /opt/qt59/bin/qt59-env.sh
   - export CMAKE_PREFIX_PATH="/opt/qt59/lib/cmake/"
