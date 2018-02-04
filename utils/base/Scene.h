@@ -13,6 +13,8 @@ private:
     QString target = QString("");
     QColor bgcolor = QColor("white");
     Player  *player;
+    // TODO: Find a way to store an initially unknown number of Sprite objects in Scene
+
 public:
     Scene();
 
@@ -35,6 +37,8 @@ public:
     Player *getPlayer();
 
     void createPlayer();
+
+    // TODO: Create an createSprite() function
 };
 
 

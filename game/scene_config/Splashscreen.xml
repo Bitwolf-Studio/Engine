@@ -11,7 +11,7 @@
                 height="320"
                 x="480"
                 y="480" />
-        <sprite desc="test" />
+        <sprite desc="Test" />
     </objects>
 </map>
 

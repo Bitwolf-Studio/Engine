@@ -29,12 +29,21 @@ void XMLParser::loadXml(QString xmlFile, Scene * scene) {
         if (reader->isStartElement()) {
             if (reader->name().toString() == "map") {
                 this->readMapAttributes(reader, scene);
-                qDebug() << "Map attribute read. Read next.";
+                qDebug() << "loadXml: Map attribute read. Read next.";
                 reader->readNext();
             }
             else if (reader->name().toString() == "player") {
                 this->readPlayerAttributes(reader, scene);
-                qDebug() << "Player attribute read. Read next.";
+                qDebug() << "loadXml: Player attribute read. Read next.";
+                reader->readNext();
+            }
+            else if (reader->name().toString() == "objects") {
+                qDebug() << "loadXml: Object attribute read. Read next.";
+                reader->readNext();
+            }
+            else if (reader->name().toString() == "sprite") {
+                this->readSpriteAttributes(reader, scene);
+                qDebug() << "loadXml: Sprite attribute read. Read next.";
                 reader->readNext();
             }
         }
@@ -74,10 +83,12 @@ void XMLParser::readMapAttributes(QXmlStreamReader * reader, Scene * scene) {
     // Check if time attribute is available, if yes set time on scene
     if (this->readStrAttr(reader, "time") != "") {
         scene->setTime(this->readIntAttr(reader, "time"));
+        qDebug() << "Set time attribute";
     }
     // Check if target attribute is available, if yes set target on scene
     if (this->readStrAttr(reader, "target") != "") {
         scene->setTarget(this->readStrAttr(reader, "target"));
+        qDebug() << "Set target attribute";
     }
     // Check if bgcolor is available, if yes set bgcolor on scene
     if (this->readStrAttr(reader, "bgcolor") != "") {
@@ -88,6 +99,7 @@ void XMLParser::readMapAttributes(QXmlStreamReader * reader, Scene * scene) {
         int b = colorList[2].toInt();
         int a = colorList[3].toInt();
         scene->setBgColor(QColor(r,g,b,a));
+        qDebug() << "Set bgcolor attribute.";
     }
 }
 
@@ -101,6 +113,16 @@ void XMLParser::readPlayerAttributes(QXmlStreamReader *reader, Scene *scene) {
     scene->getPlayer()->setX(reader->attributes().value(QString("x")).toInt());
     scene->getPlayer()->setY(reader->attributes().value(QString("y")).toInt());
 }
+
+/**
+ * This function reads a sprite and its attributes of the currentFile and
+ * adds it to the scene
+ * @param reader Pointer to QXmlStreamReader object
+ * @param scene Pointer to current Scene object
+ */
+void XMLParser::readSpriteAttributes(QXmlStreamReader *reader, Scene *scene) {
+    // TODO: Read Sprite attributes and store them in Scene
+};
 
 /**
  * This reads an attribute of the current XML-Token (Element).
@@ -120,4 +142,4 @@ QString XMLParser::readStrAttr(QXmlStreamReader * reader, QString attribute) {
  */
 int XMLParser::readIntAttr(QXmlStreamReader *reader, QString attribute) {
     return reader->attributes().value(attribute).toInt();
-};
+}

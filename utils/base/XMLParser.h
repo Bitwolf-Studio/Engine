@@ -13,11 +13,19 @@ private:
 
 public:
     XMLParser();
-    bool isValid(QFile * file);
-    void loadXml(QString file, Scene * scene);
-    void readMapAttributes(QXmlStreamReader * reader, Scene * scene);
-    void readPlayerAttributes(QXmlStreamReader * reader, Scene *scene);
-    QString readStrAttr(QXmlStreamReader * reader, QString attribute);
+
+    bool isValid(QFile *file);
+
+    void loadXml(QString file, Scene *scene);
+
+    void readMapAttributes(QXmlStreamReader *reader, Scene *scene);
+
+    void readPlayerAttributes(QXmlStreamReader *reader, Scene *scene);
+
+    void readSpriteAttributes(QXmlStreamReader *reader, Scene *scene);
+
+    QString readStrAttr(QXmlStreamReader *reader, QString attribute);
+
     int readIntAttr(QXmlStreamReader *reader, QString attribute);
 };
 
