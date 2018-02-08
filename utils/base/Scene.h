@@ -7,18 +7,38 @@
 
 class Scene : public QGraphicsScene {
 private:
-    int width = 1280;
-    int height = 720;
-    Player * player;
+    int     width  = 1280;
+    int     height = 720;
+    int     time   = 2000;
+    QString target = QString("");
+    QColor bgcolor = QColor("white");
+    Player  *player;
+    // TODO: Find a way to store an initially unknown number of Sprite objects in Scene
+
 public:
     Scene();
+
     int getWidth();
+
     int getHeight();
+
     void setWidth(int x);
+
     void setHeight(int y);
-    void setRect();
+
+    void setTime(int time);
+
+    void setTarget(QString target);
+
+    void setBgColor(QColor color);
+
     void prepareScene();
-    Player * getPlayer();
+
+    Player *getPlayer();
+
+    void createPlayer();
+
+    // TODO: Create an createSprite() function
 };
 
 

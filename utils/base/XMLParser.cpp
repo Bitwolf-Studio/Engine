@@ -20,27 +20,36 @@ void XMLParser::loadXml(QString xmlFile, Scene * scene) {
 
     this->isValid(file);
 
-    QXmlStreamReader reader;
-    reader.setDevice(file);
-    reader.readNext();
+    auto reader = new QXmlStreamReader();
+    reader->setDevice(file);
+    reader->readNext();
 
-    while(!reader.atEnd() && !reader.hasError()) {
-        reader.readNext();
-        if (reader.isStartElement()) {
-            if (reader.name().toString() == "map") {
-                scene->setWidth(reader.attributes().value(QString("width")).toInt());
-                scene->setHeight(reader.attributes().value(QString("height")).toInt());
-                reader.readNext();
+    while(!reader->atEnd() && !reader->hasError()) {
+        reader->readNext();
+        if (reader->isStartElement()) {
+            if (reader->name().toString() == "map") {
+                this->readMapAttributes(reader, scene);
+                qDebug() << "loadXml: Map attribute read. Read next.";
+                reader->readNext();
             }
-            else if (reader.name().toString() == "player") {
-                scene->getPlayer()->setX(reader.attributes().value(QString("x")).toInt());
-                scene->getPlayer()->setY(reader.attributes().value(QString("y")).toInt());
-                reader.readNext();
+            else if (reader->name().toString() == "player") {
+                this->readPlayerAttributes(reader, scene);
+                qDebug() << "loadXml: Player attribute read. Read next.";
+                reader->readNext();
+            }
+            else if (reader->name().toString() == "objects") {
+                qDebug() << "loadXml: Object attribute read. Read next.";
+                reader->readNext();
+            }
+            else if (reader->name().toString() == "sprite") {
+                this->readSpriteAttributes(reader, scene);
+                qDebug() << "loadXml: Sprite attribute read. Read next.";
+                reader->readNext();
             }
         }
     }
-    if (reader.hasError()) {
-        qDebug() << reader.errorString();
+    if (reader->hasError()) {
+        qDebug() << reader->errorString();
     }
 
     file->close();
@@ -61,4 +70,76 @@ bool XMLParser::isValid(QFile * file) {
     else {
         return false;
     }
+}
+/**
+ * This function reads the <map> subtree of the currentFile
+ * @param reader The QXmlStreamReader object
+ * @param scene The current Scene object
+ */
+void XMLParser::readMapAttributes(QXmlStreamReader * reader, Scene * scene) {
+    // Set width and height of the Scene
+    scene->setWidth(this->readIntAttr(reader, "width"));
+    scene->setHeight(this->readIntAttr(reader, "height"));
+    // Check if time attribute is available, if yes set time on scene
+    if (this->readStrAttr(reader, "time") != "") {
+        scene->setTime(this->readIntAttr(reader, "time"));
+        qDebug() << "Set time attribute";
+    }
+    // Check if target attribute is available, if yes set target on scene
+    if (this->readStrAttr(reader, "target") != "") {
+        scene->setTarget(this->readStrAttr(reader, "target"));
+        qDebug() << "Set target attribute";
+    }
+    // Check if bgcolor is available, if yes set bgcolor on scene
+    if (this->readStrAttr(reader, "bgcolor") != "") {
+        QString colorString = this->readStrAttr(reader, "bgcolor");
+        QStringList colorList = colorString.split(",");
+        int r = colorList[0].toInt();
+        int g = colorList[1].toInt();
+        int b = colorList[2].toInt();
+        int a = colorList[3].toInt();
+        scene->setBgColor(QColor(r,g,b,a));
+        qDebug() << "Set bgcolor attribute.";
+    }
+}
+
+/**
+ * This function read the <player> attributes of the currentFile
+ * @param reader The QXmlStreamReader object
+ * @param scene The current Scene object
+ */
+void XMLParser::readPlayerAttributes(QXmlStreamReader *reader, Scene *scene) {
+    scene->createPlayer();
+    scene->getPlayer()->setX(reader->attributes().value(QString("x")).toInt());
+    scene->getPlayer()->setY(reader->attributes().value(QString("y")).toInt());
+}
+
+/**
+ * This function reads a sprite and its attributes of the currentFile and
+ * adds it to the scene
+ * @param reader Pointer to QXmlStreamReader object
+ * @param scene Pointer to current Scene object
+ */
+void XMLParser::readSpriteAttributes(QXmlStreamReader *reader, Scene *scene) {
+    // TODO: Read Sprite attributes and store them in Scene
 };
+
+/**
+ * This reads an attribute of the current XML-Token (Element).
+ * @param reader Pointer to QXmlStringReader object
+ * @param attribute QString or String of the name of the attribute
+ * @return The attribute converted to a string
+ */
+QString XMLParser::readStrAttr(QXmlStreamReader * reader, QString attribute) {
+    return reader->attributes().value(attribute).toString();
+}
+
+/**
+ * This reads an attribute of the current XML-Token (Element)
+ * @param reader Pointer to QXmlStreamReader object
+ * @param attribute QString or String of the name of the attribute
+ * @return The attribute converted to an integer
+ */
+int XMLParser::readIntAttr(QXmlStreamReader *reader, QString attribute) {
+    return reader->attributes().value(attribute).toInt();
+}
