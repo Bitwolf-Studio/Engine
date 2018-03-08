@@ -1,20 +1,18 @@
 #ifndef BITWOLF_ENGINE_SCENE_H
 #define BITWOLF_ENGINE_SCENE_H
 
-
 #include <QGraphicsScene>
 #include "../objects/Player.h"
 
 class Scene : public QGraphicsScene {
 private:
-    int     width  = 1280;
-    int     height = 720;
-    int     time   = 2000;
-    QString target = QString("");
-    QColor bgcolor = QColor("white");
-    Player  *player;
-    // TODO: Find a way to store an initially unknown number of Sprite objects in Scene
-
+    int           width   = 1280;
+    int           height  = 720;
+    int           time    = 2000;
+    QString       target  = QString("");
+    QColor        bgcolor = QColor("white");
+    Player        *player;
+    QGraphicsItem bgimage;
 public:
     Scene();
 
